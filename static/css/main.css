@@ -3,28 +3,82 @@
     width: 64px;
 }
 
+.orbitron-<uniquifier> {
+  font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+
+.btn-text:hover {
+    background-color: #ffffff;
+}
+
+.btn-text a:hover {
+    color: #de2a59;
+}
+
+.li-text:hover {
+    color: #de2a59;
+}
+
+.task-text {
+    border-color: #000000;
+    outline-color: #000000;
+    color: #000000;
+}
+
+
 body {
+    font-family: "Orbitron", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-style: normal;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Задаем минимальную высоту body, чтобы занимать всю видимую область окна браузера */
+    min-height: 100vh; /* пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ body, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
 }
 
 .content {
-    flex: 1; /* Растягиваем содержимое страницы на всю доступную высоту */
+    flex: 1; /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ */
 }
 
 .site-footer {
-    background-color: #1f75fe;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #4E5452;
     color: #ffffff;
     text-align: center;
-    padding: 10px; /* добавляем отступы, чтобы футер выглядел лучше */
-    margin-top: auto; /* прижимаем футер к нижней части страницы */
+    padding: 10px; /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ */
+    margin-top: auto; /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
+}
+
+.site-footer a {
+    margin: 0 10px; /* Р”РѕР±Р°РІСЊС‚Рµ РѕС‚СЃС‚СѓРїС‹ РјРµР¶РґСѓ СЌР»РµРјРµРЅС‚Р°РјРё, РµСЃР»Рё РЅРµРѕР±С…РѕРґРёРјРѕ */
 }
 
 .site-footer p {
-  margin: 0;
-  line-height: 50px;
+    margin: 0;
+    line-height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+.footer-img {
+    margin-left: 10px;
+}
+
+.footer_img_ {
+    height: 27px;
+    width: 27px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
