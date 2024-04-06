@@ -33,5 +33,15 @@ def task4():
     return render_template('task4.html')
 
 
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')
+
+
+@app.route('/logi')
+def logi():
+    return render_template('logi.html')
+
+
 if __name__ == ('__main__'):
     app.run(debug=True)
