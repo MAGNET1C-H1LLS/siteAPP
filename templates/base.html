@@ -21,16 +21,17 @@
           </div>
 
           <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="{{ url_for('task1') }}" class="nav-link px-2 link-secondary">Task1</a></li>
+            <li><a href="{{ url_for('task1') }}" class="nav-link px-2">Task1</a></li>
             <li><a href="{{ url_for('task2') }}" class="nav-link px-2">Task2</a></li>
             <li><a href="{{ url_for('task3') }}" class="nav-link px-2">Task3</a></li>
             <li><a href="{{ url_for('task4') }}" class="nav-link px-2">Task4</a></li>
           </ul>
 
           <div class="col-md-3 text-end">
-            <button type="button" class="btn btn-outline-primary me-2">Login</button>
-            <button type="button" class="btn btn-primary">Sign-up</button>
+              <button type="button" class="btn btn-outline-primary me-2"><a href="{{ url_for('logi') }}" class="nav-link px-2">Login</a></button>
+              <button type="button" class="btn btn-outline-primary me-2"><a href="{{ url_for('signup') }}" class="nav-link px-2">Sign-up</a></button>
           </div>
+
         </header>
 
 
@@ -55,5 +56,8 @@
 
     </div>
 
+    <footer class="site-footer">
+        <p class="copy">© MAGNET1C H1LLS, 2024</p>
+    </footer>
 </body>
 </html>
