@@ -5,5 +5,15 @@
 {% endblock %}
 
 {% block body %}
-    <h1> Второе задание </h1>
+    <h1> Second task </h1>
+    <form method="post" action="show_server_config">
+        <select name="option">
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+    {% if text %}
+        <p>{{ text }}</p>
+    {% endif %}
 {% endblock %}

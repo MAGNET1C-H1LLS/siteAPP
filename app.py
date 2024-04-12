@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -21,6 +21,19 @@ def task1():
 @app.route('/task2')
 def task2():
     return render_template('task2.html')
+
+@app.route('/show_server_config', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        selected_option = request.form['option']
+        if selected_option == '1':
+            text = 'hello'
+        elif selected_option == '2':
+            text = 'bye-bye'
+        else:
+            text = ''
+        return render_template('task2.html', text=text)
+    return render_template('task2.html', text='')
 
 
 @app.route('/task3')
