@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, make_response
 
 app = Flask(__name__)
 
@@ -54,6 +54,15 @@ def signup():
 @app.route('/logi')
 def logi():
     return render_template('logi.html')
+
+@app.route('/head', methods=['GET', 'HEAD'])
+def test_head():
+    if request.method == 'GET':
+        return "Головой подумой!"
+    response = make_response()
+    response.headers['FLAG'] = 'mgnh1lls{1_h4v3_4_h34d4ch3}'
+    return response
+    
 
 
 if __name__ == ('__main__'):
