@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<connection>
+    <node>smtp.office365.com</node>
+    <username>username@contoso.com</username>
+    <password>password123qwe</password>
+    <ssl>no</ssl>
+</connection>

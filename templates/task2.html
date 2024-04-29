@@ -8,12 +8,20 @@
     <h1> Second task </h1>
     <form method="post" action="show_server_config">
         <select name="option">
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
+            <option value="in">Incoming Server</option>
+            <option value="out">Outcoming Server</option>
         </select>
         <button type="submit">Submit</button>
     </form>
-    {% if text %}
-        <p>{{ text }}</p>
+
+    {% if elements %}
+        <ul>
+            {% for element in elements %}
+                <li>{{ element }}</li>
+            {% endfor %}
+        </ul>
     {% endif %}
+
+
+
 {% endblock %}

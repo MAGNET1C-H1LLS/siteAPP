@@ -1,5 +1,7 @@
-from flask import Flask, render_template, request, make_response
+import os
 
+from flask import Flask, render_template, request, make_response, send_file
+import xml.etree.ElementTree as ET
 app = Flask(__name__)
 
 
@@ -22,19 +24,25 @@ def task1():
 def task2():
     return render_template('task2.html')
 
+
+# Функция для парсинга XML файла
+
+
 @app.route('/show_server_config', methods=['GET', 'POST'])
-def index():
+def show_server_config():
     if request.method == 'POST':
         selected_option = request.form['option']
-        if selected_option == '1':
-            text = 'hello'
-        elif selected_option == '2':
-            text = 'bye-bye'
-        else:
-            text = ''
-        return render_template('task2.html', text=text)
-    return render_template('task2.html', text='')
+        if selected_option == 'in':
+            tree = ET.parse('static/text/in.xml')
+        elif selected_option == 'out':
+            tree = ET.parse('static/text/out.xml')
 
+
+        root = tree.getroot()
+        elements = [child.tag + ': ' + child.text for child in root]
+
+        return render_template('task2.html', elements=elements)
+    return render_template('task2.html', elements='')
 
 @app.route('/task3')
 def task3():
@@ -62,8 +70,24 @@ def test_head():
     response = make_response()
     response.headers['FLAG'] = 'mgnh1lls{1_h4v3_4_h34d4ch3}'
     return response
-    
 
+
+@app.route('/check_header')
+def check_header():
+    required_header = 'PILL'
+
+    if request.headers.get(required_header) == 'PARACETAMOL':
+        return "mgnh1lls{1_d0n7_h4v3_4_h34d4ch3}"
+    else:
+        return "I have a headache give me a PILL of PARACETAMOL"
+
+#@app.route('/get_file/<path:file_path>')
+#def get_file(file_path):
+    #    try:
+    #file_path = file_path.replace("/", "\\")  # Заменяем прямой слеш на обратный (для Windows)
+    #        return send_file(file_path)
+    #  except Exception as e:
+#      return str(e)
 
 if __name__ == ('__main__'):
     app.run(debug=True)

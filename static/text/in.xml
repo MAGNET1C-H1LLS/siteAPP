@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<connection>
+    <node>outlook.office365.com</node>
+    <username>username@contoso.com</username>
+    <port>993</port>
+    <server>server.com</server>
+    <ssl>no</ssl>
+</connection>
