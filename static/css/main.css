@@ -3,6 +3,11 @@
     width: 64px;
 }
 
+html, body {
+  height: 100%; / *  Задаем высоту для всей страницы  * /
+  margin: 0; / *  Убираем стандартные отступы  * /
+  padding: 0; / *  Убираем стандартные отступы  * /
+}
 
 .orbitron-<uniquifier> {
   font-family: "Orbitron", sans-serif;
@@ -82,4 +87,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#fullscreen-element {
+  position: absolute; / *  Абсолютное позиционирование относительно viewport  * /
+  top: 0; / *  Прижимаем элемент к верхней части экрана  * /
+  left: 0; / *  Прижимаем элемент к левой части экрана  * /
+  bottom: 0; / *  Прижимаем элемент к нижней части экрана  * /
+  right: 0; / *  Прижимаем элемент к правой части экрана  * /
+  width: fill; / *  Ширина элемента равна ширине viewport  * /
+  height: fill; / *  Высота элемента равна высоте viewport  * /
 }
