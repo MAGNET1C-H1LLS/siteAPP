@@ -5,6 +5,68 @@
 {% endblock %}
 
 {% block body %}
-    <h1> Первое задание </h1>
+    <script>
+function pong() {
+    document.getElementById("task1").innerHTML = "";
+    var link = 'd3M6Ly8yNS41Mi4xNTcuMzI6ODA4MQ=='
+    if (link !== 'd3M6Ly8yNS41Mi4xNTcuMzI6ODA4MQ=='){
+      return
+    };
+    
+    var socket = new WebSocket(atob(link));
+    var messagesToSend = 5; // Количество сообщений для отправки
+    var messagesSent = 0; // Счетчик отправленных сообщений
+    var messagesReceive = 0;
+    socket.onopen = function(event) {
+        console.log('WebSocket соединение открыто');
+        console.log(atob(link));
+        // Запускаем отправку сообщений с задержкой
+        sendMessagesWithDelay(socket, messagesToSend);
+    };
 
+    socket.onerror = function(error) {
+        console.error('WebSocket ошибка: ', error);
+    };
+
+    socket.onmessage = function(event) {
+        console.log('Получены данные: ', event.data);
+        messagesReceive++;
+        var div = document.createElement("div");
+        var endTime = performance.now(); // Время приема сообщения
+        var executionTime = endTime - socket.sendTime; // Вычисляем время между отправкой и приемом
+        div.textContent = "Получены данные, время выполнения: " + executionTime.toFixed(2) + " миллисекунд";
+        document.getElementById("task1").appendChild(div);
+        if (messagesReceive === messagesToSend){
+          socket.close();
+        };
+    };
+
+    socket.onclose = function(event) {
+        console.log('WebSocket соединение закрыто');
+    };
+
+    function sendMessagesWithDelay(socket, count) {
+        if (count > 0) {
+            setTimeout(function() {
+                var startTime = performance.now(); // Время начала отправки сообщения
+                socket.send("Hello World!");
+                console.log('Сообщение отправлено');
+                socket.sendTime = startTime; // Сохраняем временную метку отправки
+                messagesSent++;
+                if (messagesSent < messagesToSend) {
+                    sendMessagesWithDelay(socket, count - 1);
+                }
+            }, 1000);
+            
+            
+        }
+    }
+}
+    </script>
+    <h1> Первое задание </h1>
+    <div>Тык на кнопку</div>
+    <button type="button" class="btn btn-outline-primary me-2" onclick="pong()">Ping</button>
+    <div>Выполнение:</div>
+    
+    <div id="task1"></div>
 {% endblock %}
