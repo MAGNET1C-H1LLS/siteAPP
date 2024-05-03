@@ -1,9 +1,66 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Первое
+    First
 {% endblock %}
 
 {% block body %}
-    <h1> Первое задание </h1>
+    <script>
+function pong() {
+    document.getElementById("task1").innerHTML = "";
+    var link = btoa('ws://localhost:8081');
+    var socket = new WebSocket(atob(link));
+    var messagesToSend = 5; // Количество сообщений для отправки
+    var messagesSent = 0; // Счетчик отправленных сообщений
+    var messageReiceve = 0;
+
+    socket.onopen = function(event) {
+        console.log('WebSocket соединение открыто');
+        // Запускаем отправку сообщений с задержкой
+        sendMessagesWithDelay(socket, messagesToSend);
+    };
+
+    socket.onerror = function(error) {
+        console.error('WebSocket ошибка: ', error);
+    };
+
+    socket.onmessage = function(event) {
+        console.log('Получены данные: ', event.data);
+        messageReiceve++;
+        var div = document.createElement("div");
+        var endTime = performance.now(); // Время приема сообщения
+        var executionTime = endTime - socket.sendTime; // Вычисляем время между отправкой и приемом
+        div.textContent = "Получены данные, время выполнения: " + executionTime.toFixed(2) + " миллисекунд";
+        document.getElementById("task1").appendChild(div);
+        if (messagesSent === messagesToSend){
+        socket.close();
+        }
+    };
+
+    socket.onclose = function(event) {
+        console.log('WebSocket соединение закрыто');
+    };
+
+    function sendMessagesWithDelay(socket, count) {
+        if (count > 0) {
+            setTimeout(function() {
+                var startTime = performance.now(); // Время начала отправки сообщения
+                socket.send("Hello World!");
+                console.log('Сообщение отправлено');
+                socket.sendTime = startTime; // Сохраняем временную метку отправки
+                messagesSent++;
+                if (messagesSent < messagesToSend) {
+                    sendMessagesWithDelay(socket, count - 1);
+                }
+            }, 1000); // Задержка в 1000 миллисекунд (1 секунда) между отправкой каждого сообщения
+        }
+    }
+}
+    </script>
+    <h1> First task </h1>
+    <div>Press the button:</div>
+    <button type="submit" onclick="pong()">Ping</button>
+    <div>Выполнение:</div>
+    
+    <div id="task1"></div>
 {% endblock %}
