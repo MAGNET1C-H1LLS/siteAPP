@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template, request, make_response, send_file
+from flask import Flask, render_template, request, make_response, send_from_directory
 import xml.etree.ElementTree as ET
 app = Flask(__name__)
 
@@ -81,13 +81,12 @@ def check_header():
     else:
         return "I have a headache give me a PILL of PARACETAMOL"
 
-#@app.route('/get_file/<path:file_path>')
-#def get_file(file_path):
-    #    try:
-    #file_path = file_path.replace("/", "\\")  # Заменяем прямой слеш на обратный (для Windows)
-    #        return send_file(file_path)
-    #  except Exception as e:
-#      return str(e)
+
+@app.route('/files/chat.exe')
+def download_file():
+    file_name = 'zaglushka.txt'
+    return send_from_directory('files', file_name, as_attachment=True)
+
 
 if __name__ == ('__main__'):
     app.run(debug=True)
