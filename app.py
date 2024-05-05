@@ -13,7 +13,7 @@ def main_page():
 @app.route('/about')
 def about():
     return render_template('about.html')
-
+# comment
 
 @app.route('/task1')
 def task1():
