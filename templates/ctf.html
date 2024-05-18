@@ -6,6 +6,25 @@
 
 {% block body %}
 <h1>CTF</h1>
+<h5>STEGO</h5>
+<div class="tasks-container">
+    <div class="task" onclick="openPopup('n0 3y3s', 'Difficulty: Medium-Hard', '{{ url_for('static', filename='img/logo.png') }}', 'N0t s331ng th3 p4th wh3r3 y04`r3 going. L00k f0r th3 l1gh7.')">
+        <div class="task-header">
+            <h3>Stego</h3>
+            <p>Difficulty: Medium-Hard</p>
+        </div>
+    </div>
+
+    <div class="task" onclick="openPopup('Level 2', 'Difficulty: Medium', '', 'Another task description, but without an image.')">
+        <div class="task-header">
+            <h3>Level 2</h3>
+            <p>Difficulty: Medium</p>
+        </div>
+    </div>
+
+    <!-- Add more tasks as needed -->
+</div>
+<h5>WEB</h5>
 <div class="tasks-container">
     <div class="task" onclick="openPopup('n0 3y3s', 'Difficulty: Medium-Hard', '{{ url_for('static', filename='img/logo.png') }}', 'N0t s331ng th3 p4th wh3r3 y04`r3 going. L00k f0r th3 l1gh7.')">
         <div class="task-header">
