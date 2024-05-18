@@ -8,17 +8,17 @@
 <h1>CTF</h1>
 <h5>STEGO</h5>
 <div class="tasks-container">
-    <div class="task" onclick="openPopup('n0 3y3s', 'Difficulty: Medium-Hard', '{{ url_for('static', filename='img/logo.png') }}', 'N0t s331ng th3 p4th wh3r3 y04`r3 going. L00k f0r th3 l1gh7.')">
+    <div class="task" onclick="openPopup('n0 3y3s', 'Difficulty: Medium-Hard', '{{ url_for('static', filename='img/stego_task_1.png') }}', 'N0t s331ng th3 p4th wh3r3 y04`r3 going. L00k f0r th3 l1gh7.')">
         <div class="task-header">
-            <h3>Stego</h3>
-            <p>Difficulty: Medium-Hard</p>
+            <h3 style="color: white">Stego</h3>
+            <p style="color: white">Difficulty: Medium-Hard</p>
         </div>
     </div>
 
     <div class="task" onclick="openPopup('Level 2', 'Difficulty: Medium', '', 'Another task description, but without an image.')">
         <div class="task-header">
-            <h3>Level 2</h3>
-            <p>Difficulty: Medium</p>
+            <h3 style="color: white">Level 2</h3>
+            <p style="color: white">Difficulty: Medium</p>
         </div>
     </div>
 
@@ -28,20 +28,54 @@
 <div class="tasks-container">
     <div class="task" onclick="openPopup('n0 3y3s', 'Difficulty: Medium-Hard', '{{ url_for('static', filename='img/logo.png') }}', 'N0t s331ng th3 p4th wh3r3 y04`r3 going. L00k f0r th3 l1gh7.')">
         <div class="task-header">
-            <h3>Stego</h3>
-            <p>Difficulty: Medium-Hard</p>
+            <h3 style="color: white">Stego</h3>
+            <p style="color: white">Difficulty: Medium-Hard</p>
         </div>
     </div>
 
     <div class="task" onclick="openPopup('Level 2', 'Difficulty: Medium', '', 'Another task description, but without an image.')">
         <div class="task-header">
-            <h3>Level 2</h3>
-            <p>Difficulty: Medium</p>
+            <h3 style="color: white">Level 2</h3>
+            <p style="color: white">Difficulty: Medium</p>
         </div>
     </div>
 
     <!-- Add more tasks as needed -->
 </div>
+
+<h5>CRYPTO</h5>
+<div class="tasks-container">
+    <div class="task" onclick="openPopup('n0 3y3s', 'Difficulty: Medium-Hard', '{{ url_for('static', filename='img/logo.png') }}', 'N0t s331ng th3 p4th wh3r3 y04`r3 going. L00k f0r th3 l1gh7.')">
+        <div class="task-header">
+            <h3 style="color: white">Stego</h3>
+            <p style="color: white">Difficulty: Medium-Hard</p>
+        </div>
+    </div>
+
+    <div class="task" onclick="openPopup('Level 2', 'Difficulty: Medium', '', 'Another task description, but without an image.')">
+        <div class="task-header">
+            <h3 style="color: white">Level 2</h3>
+            <p style="color: white">Difficulty: Medium</p>
+        </div>
+    </div>
+
+    <div class="task" onclick="openPopup('Level 2', 'Difficulty: Medium', '', 'Another task description, but without an image.')">
+        <div class="task-header">
+            <h3 style="color: white">Level 2</h3>
+            <p style="color: white">Difficulty: Medium</p>
+        </div>
+    </div>
+
+    <div class="task" onclick="openPopup('Level 2', 'Difficulty: Medium', '', 'Another task description, but without an image.')">
+        <div class="task-header">
+            <h3 style="color: white">Level 2</h3>
+            <p style="color: white">Difficulty: Medium</p>
+        </div>
+    </div>
+
+    <!-- Add more tasks as needed -->
+</div>
+
 
 <div class="overlay" id="overlay">
     <div class="popup">
@@ -62,6 +96,9 @@
 </div>
 
 <style>
+    h5{
+        margin: 10px;
+    }
     .overlay {
         position: fixed;
         top: 0;
@@ -101,18 +138,20 @@
     }
     .task {
         border: 1px solid #ccc; /* Цвет и толщина границы плиток */
+        background-color: #4E5452;
         padding: 20px; /* Внутренние отступы плиток */
         border-radius: 5px; /* Радиус закругления углов плиток */
         cursor: pointer;
         text-align: center;
     }
+
     .mb-3 {
         margin-bottom: 15px; /* Нижний отступ для элементов формы */
     }
 
      #popup-image {
-        width: 30%; /* Максимальная ширина изображения равна ширине родительского контейнера */
-        height: 40%; /* Максимальная высота изображения во всплывающем окне */
+        width: 500px; /* Максимальная ширина изображения равна ширине родительского контейнера */
+        height: 300px; /* Максимальная высота изображения во всплывающем окне */
         margin: 0 auto; /* Центрирование изображения по горизонтали */
     }
 </style>
