@@ -1,12 +1,13 @@
-.header_img{
+/* Existing styles */
+.header_img {
     height: 70px;
     width: 64px;
 }
 
 html, body {
-  height: 100%; / *  Задаем высоту для всей страницы  * /
-  margin: 0; / *  Убираем стандартные отступы  * /
-  padding: 0; / *  Убираем стандартные отступы  * /
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .orbitron-<uniquifier> {
@@ -34,7 +35,6 @@ html, body {
     color: #000000;
 }
 
-
 body {
     font-family: "Orbitron", sans-serif;
     font-optical-sizing: auto;
@@ -44,11 +44,11 @@ body {
     padding: 0;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* ������ ����������� ������ body, ����� �������� ��� ������� ������� ���� �������� */
+    min-height: 100vh;
 }
 
 .content {
-    flex: 1; /* ����������� ���������� �������� �� ��� ��������� ������ */
+    flex: 1;
 }
 
 .site-footer {
@@ -58,12 +58,12 @@ body {
     background-color: #4E5452;
     color: #ffffff;
     text-align: center;
-    padding: 10px; /* ��������� �������, ����� ����� �������� ����� */
-    margin-top: auto; /* ��������� ����� � ������ ����� �������� */
+    padding: 10px;
+    margin-top: auto;
 }
 
 .site-footer a {
-    margin: 0 10px; /* Добавьте отступы между элементами, если необходимо */
+    margin: 0 10px;
 }
 
 .site-footer p {
@@ -90,6 +90,22 @@ body {
 }
 
 iframe {
-    width: 100%;
+    width: 99%;
     height: 50em;
+}
+
+.center-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+}
+
+.center-button iframe {
+    margin-top: 0 !important;
+}
+
+.move-down {
+    margin-top: 20px;
 }

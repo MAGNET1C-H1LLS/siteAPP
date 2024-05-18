@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    CTF
+{% endblock %}
+
+{% block body %}
+<h1>CTF</h1>
+<div class="tasks-container">
+    <div class="task" onclick="openPopup('n0 3y3s', 'Difficulty: Medium-Hard', '{{ url_for('static', filename='img/logo.png') }}', 'N0t s331ng th3 p4th wh3r3 y04`r3 going. L00k f0r th3 l1gh7.')">
+        <div class="task-header">
+            <h3>Stego</h3>
+            <p>Difficulty: Medium-Hard</p>
+        </div>
+    </div>
+
+    <div class="task" onclick="openPopup('Level 2', 'Difficulty: Medium', '', 'Another task description, but without an image.')">
+        <div class="task-header">
+            <h3>Level 2</h3>
+            <p>Difficulty: Medium</p>
+        </div>
+    </div>
+
+    <!-- Add more tasks as needed -->
+</div>
+
+<div class="overlay" id="overlay">
+    <div class="popup">
+        <button onclick="closePopup()" class="close-btn">&times;</button>
+        <h3 id="popup-title">Всплывающее окно</h3>
+        <p id="popup-difficulty">Сложность</p>
+        <img id="popup-image" src="" alt="Task Image" class="img-fluid" style="display: none;">
+        <p id="popup-description">Содержимое всплывающего окна.</p>
+
+        <form id="popup-form" method="post" action="/submit-task">
+            <div class="mb-3">
+                <label for="task-input" class="form-label">Your Answer</label>
+                <input type="text" class="form-control" id="task-input" name="answer" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Отправить</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+    .popup {
+        position: relative;
+        background-color: white; /* Цвет фона */
+        padding: 40px; /* Внутренние отступы */
+        border-radius: 10px; /* Радиус закругления углов */
+        text-align: center;
+        width: 70%; /* Ширина окна */
+        height: 70%; /* Высота окна */
+        max-width: 800px; /* Максимальная ширина окна */
+        max-height: 600px; /* Максимальная высота окна */
+    }
+    .close-btn {
+        position: absolute;
+        top: 10px; /* Позиция кнопки закрытия */
+        right: 10px;
+        background: none;
+        border: none;
+        font-size: 24px; /* Размер шрифта крестика */
+        cursor: pointer;
+    }
+    .tasks-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Сетка из 3 колонок */
+        gap: 10px; /* Расстояние между плитками */
+    }
+    .task {
+        border: 1px solid #ccc; /* Цвет и толщина границы плиток */
+        padding: 20px; /* Внутренние отступы плиток */
+        border-radius: 5px; /* Радиус закругления углов плиток */
+        cursor: pointer;
+        text-align: center;
+    }
+    .mb-3 {
+        margin-bottom: 15px; /* Нижний отступ для элементов формы */
+    }
+
+     #popup-image {
+        width: 30%; /* Максимальная ширина изображения равна ширине родительского контейнера */
+        height: 40%; /* Максимальная высота изображения во всплывающем окне */
+        margin: 0 auto; /* Центрирование изображения по горизонтали */
+    }
+</style>
+
+
+<script>
+    function openPopup(title, difficulty, imageUrl, description) {
+        document.getElementById("popup-title").innerText = title;
+        document.getElementById("popup-difficulty").innerText = difficulty;
+        var popupImage = document.getElementById("popup-image");
+        if (imageUrl) {
+            popupImage.src = imageUrl;
+            popupImage.style.display = "block";
+        } else {
+            popupImage.style.display = "none";
+        }
+        document.getElementById("popup-description").innerText = description;
+        document.getElementById("overlay").style.display = "flex";
+    }
+
+    function closePopup() {
+        document.getElementById("overlay").style.display = "none";
+    }
+</script>
+{% endblock %}

@@ -48,11 +48,13 @@ def show_server_config():
 def task3():
     return render_template('task3.html')
 
-
 @app.route('/task4')
 def task4():
     return render_template('task4.html')
 
+@app.route('/ctf')
+def ctf():
+    return render_template('ctf.html')
 
 @app.route('/signup')
 def signup():
