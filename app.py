@@ -10,6 +10,8 @@ app.secret_key = os.urandom(24)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'logi'
+context = ('./certificate.crt', './private.key')
+
 
 class User(UserMixin):
     def __init__(self, id, username, password):
@@ -30,14 +32,16 @@ def load_user(user_id):
 
 DATABASE = "postgresql://test:123@localhost:5432/test"
 
+@app.before_request
+def before_request():
+    if not request.is_secure:
+        url = request.url.replace('http://', 'https://', 1)
+        code = 301
+        return redirect(url, code=code)
+
 @app.route('/')
 def main_page():
     return render_template('main_page.html')
-
-
-@app.route('/my_account')
-def my_account():
-    return render_template('my_account.html')
 
 @app.route('/about')
 def about():
@@ -94,10 +98,6 @@ def task3():
 @login_required
 def task4():
     return render_template('task4.html')
-
-@app.route('/ctf')
-def ctf():
-    return render_template('ctf.html')
 
 @app.route('/signup')
 def signup():
@@ -183,4 +183,4 @@ def download_file():
 
 
 if __name__ == ('__main__'):
-    app.run(host="0.0.0.0", port=80)
+    app.run(host="0.0.0.0", port=443, ssl_context=context)
