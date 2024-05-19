@@ -35,6 +35,10 @@ def main_page():
     return render_template('main_page.html')
 
 
+@app.route('/my_account')
+def my_account():
+    return render_template('my_account.html')
+
 @app.route('/about')
 def about():
     return render_template('about.html')
@@ -86,14 +90,16 @@ def show_server_config():
 def task3():
     return render_template('task3.html')
 
-
 @app.route('/task4')
 @login_required
 def task4():
     return render_template('task4.html')
 
-#123
-@app.route('/signup', methods=['GET', 'POST'])
+@app.route('/ctf')
+def ctf():
+    return render_template('ctf.html')
+
+@app.route('/signup')
 def signup():
    if request.method == 'POST':
        username = request.form['username']
