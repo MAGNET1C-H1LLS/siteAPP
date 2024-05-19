@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Первое
+{% endblock %}
+
+{% block body %}
+    <h1> NICKNAME </h1>
+    <div class="my_account_container">
+        <div class="form-container">
+            <form method="POST" action="/change_password">
+                <h5>Change password</h5> <p></p>
+                <label for="old_password">Old password:</label><br>
+                <input type="password" id="old_password" name="old_password"><br><br>
+
+                <label for="new_password">New password:</label><br>
+                <input type="password" id="new_password" name="new_password"><br><br>
+
+                <label for="confirm_password">Confirm password:</label><br>
+                <input type="password" id="confirm_password" name="confirm_password"><br><br>
+
+                <input type="submit" value="Change password">
+            </form>
+        </div>
+
+         <div class="team-info">
+             <h5>Team info</h5> <p></p>
+            <p>Team name</p>
+            <p>Point:</p>
+            <div class="team-logo-container">
+                <img class="team_logo" src="static/img/logo_wout.png" alt="Team logo">
+            </div>
+        </div>
+    </div>
+{% endblock %}

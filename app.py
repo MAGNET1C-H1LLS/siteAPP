@@ -10,6 +10,10 @@ def main_page():
     return render_template('main_page.html')
 
 
+@app.route('/my_account')
+def my_account():
+    return render_template('my_account.html')
+
 @app.route('/about')
 def about():
     return render_template('about.html')
