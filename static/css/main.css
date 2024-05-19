@@ -51,16 +51,28 @@ body {
     flex: 1;
 }
 
+@keyframes gradientAnimation {
+    0% {
+        background-color: #4E5452;
+    }
+    50% {
+        background-color: #2C3331;
+    }
+    100% {
+        background-color: #4E5452;
+    }
+}
+
 .site-footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: left 0% / 12% 100% repeat-x url("../img/pngegg.png");
-    background-color: #2C3331;
+    background-color: #4E5452;
     color: #ffffff;
     text-align: center;
     padding: 10px;
     margin-top: auto;
+    animation: gradientAnimation 5s ease infinite;
 }
 
 .site-footer a {
