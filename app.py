@@ -1,9 +1,34 @@
 import os
 
-from flask import Flask, render_template, request, make_response, send_from_directory
+from flask import Flask, render_template, request, make_response, send_from_directory, redirect, url_for, flash
 import xml.etree.ElementTree as ET
-app = Flask(__name__)
+from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
+import psycopg2
 
+app = Flask(__name__)
+app.secret_key = os.urandom(24)
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'logi'
+
+class User(UserMixin):
+    def __init__(self, id, username, password):
+        self.id = id
+        self.username = username
+        self.password = password
+
+@login_manager.user_loader
+def load_user(user_id):
+    with psycopg2.connect(DATABASE) as connection:
+        cursor = connection.cursor()
+        query = "SELECT * FROM Users WHERE id = %s"
+        cursor.execute(query, (int(user_id),))
+        user = cursor.fetchone()
+        if user:
+            return User(id=user[0], username=user[1], password=user[2])
+    return None
+
+DATABASE = "postgresql://test:123@localhost:5432/test"
 
 @app.route('/')
 def main_page():
@@ -15,12 +40,24 @@ def about():
     return render_template('about.html')
 # comment
 
+@app.route('/my_account')
+@login_required
+def my_account():
+    return render_template('my_account.html')
+
+@app.route('/ctf')
+@login_required
+def ctf():
+    return render_template('ctf.html')
+
 @app.route('/task1')
+@login_required
 def task1():
     return render_template('task1.html')
 
 
 @app.route('/task2')
+@login_required
 def task2():
     return render_template('task2.html')
 
@@ -45,23 +82,74 @@ def show_server_config():
     return render_template('task2.html', elements='')
 
 @app.route('/task3')
+@login_required
 def task3():
     return render_template('task3.html')
 
 
 @app.route('/task4')
+@login_required
 def task4():
     return render_template('task4.html')
 
 
-@app.route('/signup')
+@app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    return render_template('signup.html')
+   if request.method == 'POST':
+       username = request.form['username']
+       password = request.form['password']
+       confirm_password = request.form['confirm_password']
+
+       if password != confirm_password:
+           flash('Passwords do not match!', 'danger')
+           return redirect(url_for('signup'))
+
+       with psycopg2.connect(DATABASE) as connection:
+           cursor = connection.cursor()
+           query = "SELECT * FROM Users WHERE Name = %s"
+           cursor.execute(query, (username,))
+           user = cursor.fetchone()
+           if user:
+               flash('User already exists!', 'danger')
+               return redirect(url_for('signup'))
+           else:
+               cursor.execute("INSERT INTO Users (Name, Password) VALUES (%s, %s)", (username, password))
+               connection.commit()
+               return redirect(url_for('logi'))
+   else:
+       return render_template("signup.html")
 
 
-@app.route('/logi')
+
+@app.route('/logi', methods=['GET', 'POST'])
 def logi():
-    return render_template('logi.html')
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        with psycopg2.connect(DATABASE) as connection:
+            cursor = connection.cursor()
+            query = "SELECT * FROM Users WHERE Name = %s AND Password = %s"
+            cursor.execute(query, (username, password))
+            user = cursor.fetchone()
+            if user:
+                user_obj = User(id=user[0], username=user[1], password=user[2])
+                login_user(user_obj)
+                print(user[0], user[1], user[2])
+                return redirect(url_for('main_page'))
+            else:
+                print("ya check delay delay")
+                flash("ВЫ КОНЧЕННЫЙ УРОДЕЦ", 'danger')
+    return render_template("logi.html")
+
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('main_page'))
+
+
 
 @app.route('/head', methods=['GET', 'HEAD'])
 def test_head():
@@ -84,9 +172,9 @@ def check_header():
 
 @app.route('/files/chat.exe')
 def download_file():
-    file_name = 'zaglushka.txt'
+    file_name = 'Chat.exe'
     return send_from_directory('files', file_name, as_attachment=True)
 
 
 if __name__ == ('__main__'):
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=80)

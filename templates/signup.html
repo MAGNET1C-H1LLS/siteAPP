@@ -1,13 +1,25 @@
 {% extends 'base.html' %}
 
 {% block title %}
-
+    Registration
 {% endblock %}
 
 {% block body %}
     <div class="row justify-content-center mt-5">
         <div class="col-md-6">
             <h2 class="text-center mb-4">Registration</h2>
+            
+            <!-- Flash messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flashes">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
             <form action="{{ url_for('signup') }}" method="POST">
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
@@ -26,7 +38,7 @@
                     <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
                 </div>
                 <div class="text-center">
-                    <button type="button" class="btn me-2 task-text btn-text"><a href="{{ url_for('main_page') }}" class="nav-link px-2 task-text">Sign-up</a></button>
+                    <button type="submit" class="btn me-2 task-text btn-text">Sign-up</button>
                 </div>
             </form>
         </div>

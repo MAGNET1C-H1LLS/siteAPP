@@ -8,7 +8,7 @@
     <script>
 function pong() {
     document.getElementById("task1").innerHTML = "";
-    var link = btoa('ws://localhost:8081');
+    var link = btoa('ws://95.163.230.139:8081');
     var socket = new WebSocket(atob(link));
     var messagesToSend = 5; // Количество сообщений для отправки
     var messagesSent = 0; // Счетчик отправленных сообщений
@@ -57,7 +57,7 @@ function pong() {
     }
 }
     </script>
-    <h1> First task </h1>
+    <h1> Echo </h1>
     <div>Press the button:</div>
     <button type="submit" onclick="pong()">Ping</button>
     <div>Выполнение:</div>

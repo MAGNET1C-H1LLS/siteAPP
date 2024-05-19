@@ -22,15 +22,21 @@
           </div>
 
           <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="{{ url_for('task1') }}" class="nav-link px-2 task-text li-text">Task1</a></li>
-            <li><a href="{{ url_for('task2') }}" class="nav-link px-2 task-text li-text">Task2</a></li>
-            <li><a href="{{ url_for('task3') }}" class="nav-link px-2 task-text li-text">Task3</a></li>
-            <li><a href="{{ url_for('task4') }}" class="nav-link px-2 task-text li-text">Task4</a></li>
-          </ul>
+            <li><a href="{{ url_for('task1') }}" class="nav-link px-2 task-text li-text">Echo</a></li>
+            <li><a href="{{ url_for('task2') }}" class="nav-link px-2 task-text li-text">XML</a></li>
+            <li><a href="{{ url_for('task4') }}" class="nav-link px-2 task-text li-text">Chat</a></li>
+            <li><a href="{{ url_for('ctf') }}" class="nav-link px-2 task-text li-text">CTF</a></li>
+            </ul>
+
 
           <div class="col-md-3 text-end">
-              <button type="button" class="btn me-2 task-text btn-text"><a href="{{ url_for('logi') }}" class="nav-link px-2 task-text">Login</a></button>
-              <button type="button" class="btn me-2 task-text btn-text"><a href="{{ url_for('signup') }}" class="nav-link px-2 task-text">Sign-up</a></button>
+              {% if current_user.is_authenticated %}
+                  <button type="button" class="btn me-2 task-text btn-text"><a href="{{ url_for('logout') }}" class="nav-link px-2 task-text">Log Out</a></button>
+                  <button type="button" class="btn me-2 task-text btn-text"><a href="{{ url_for('my_account') }}" class="nav-link px-2 task-text">My Account</a></button>
+              {% else %}
+                   <button type="button" class="btn me-2 task-text btn-text"><a href="{{ url_for('logi') }}" class="nav-link px-2 task-text">Login</a></button>
+                   <button type="button" class="btn me-2 task-text btn-text"><a href="{{ url_for('signup') }}" class="nav-link px-2 task-text">Sign-up</a></button>
+              {% endif %}
           </div>
 
         </header>
