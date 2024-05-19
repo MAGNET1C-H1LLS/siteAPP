@@ -83,3 +83,43 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+
+.form-container {
+    border: 2px solid black; /* Черная обводка шириной 2 пикселя */
+    padding: 20px;
+    width: 300px;
+    height: 370px;
+    margin-top: 30px;
+    margin-right: 100px;
+
+}
+
+.team-info {
+    border: 2px solid black; /* Черная обводка шириной 2 пикселя */
+    padding: 20px;
+    width: 300px;
+    height: 370px;
+    margin: 30px 0 30px 0; /* Добавляем верхний отступ, чтобы разделить секции */
+
+
+}
+
+.my_account_container{
+    display:flex;
+}
+
+.team_logo{
+    height: 150px;
+    width: 150px;
+
+    border: 2px dotted gray;
+}
+
+.team-logo-container{
+    margin-top: 50px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: flex
+}
