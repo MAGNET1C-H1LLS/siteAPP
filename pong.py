@@ -1,5 +1,10 @@
 import asyncio
 import websockets
+import ssl
+import pathlib
+
+ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+
 
 async def echo(websocket, path):
     client_ip = websocket.remote_address[0]
@@ -21,7 +26,7 @@ async def echo(websocket, path):
         await websocket.send("ANSWER")
 
 async def main():
-    async with websockets.serve(echo, "0.0.0.0", 8081):
+    async with websockets.serve(echo, "0.0.0.0", 8081, ssl=ssl_context):
         await asyncio.Future() 
 
 if __name__ == "__main__":

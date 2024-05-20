@@ -51,7 +51,7 @@ def about():
 @app.route('/my_account')
 @login_required
 def my_account():
-    return render_template('my_account.html')
+    return render_template('my_account.html', username=current_user.username)
 
 @app.route('/ctf')
 @login_required
