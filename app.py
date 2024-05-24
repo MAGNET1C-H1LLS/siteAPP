@@ -12,7 +12,6 @@ login_manager.init_app(app)
 login_manager.login_view = 'logi'
 context = ('./../certificate.crt', './../private.key')
 
-
 class User(UserMixin):
     def __init__(self, id, username, password):
         self.id = id
@@ -99,7 +98,8 @@ def task3():
 def task4():
     return render_template('task4.html')
 
-@app.route('/signup')
+
+@app.route('/signup', methods=['GET', 'POST'])
 def signup():
    if request.method == 'POST':
        username = request.form['username']
@@ -182,5 +182,11 @@ def download_file():
     return send_from_directory('files', file_name, as_attachment=True)
 
 
-if __name__ == ('__main__'):
+@app.route('/submit-task', methods=['GET', 'POST'])
+def submit_task():
+    if request.method == 'POST':
+        print(request)
+
+
+if __name__ == '__main__':
     app.run(host="0.0.0.0", port=443, ssl_context=context)
