@@ -58,7 +58,23 @@ def about():
 @app.route('/my_account')
 @login_required
 def my_account():
-    return render_template('my_account.html', username=current_user.username)
+    sum_points = 0
+
+    with psycopg2.connect(DATABASE) as con:
+        with con.cursor() as curs:
+            curs.execute(
+                '''
+                SELECT SUM(t.Point) AS total_points
+                FROM done_tasks dt
+                JOIN tasks t ON dt.task_id = t.id
+                WHERE dt.user_id = %s;
+                ''', (current_user.id, )
+            )
+            sum_points = int(curs.fetchone()[0])
+    print(sum_points)
+    return render_template('my_account.html',
+                           username=current_user.username,
+                           sum_points=sum_points)
 
 @app.route('/ctf')
 @login_required
@@ -175,11 +191,25 @@ def logout():
 @login_required
 def submit_task():
     if request.method == 'POST':
-        response = make_response()
         answer = filter_str(request.form['answer'])
         task_title = request.form['popup_title']
         user_id = current_user.id
-        print(user_id, task_title, answer, sep = '\n')
+
+        with psycopg2.connect(DATABASE) as con:
+            with con.cursor() as curs:
+                print('CON')
+                curs.execute('SELECT id FROM tasks WHERE name=%s AND flag=%s', (task_title, answer))
+
+                print('IM CHECK')
+                task_id = curs.fetchone()
+                if not task_id:
+                    return ' '
+                print('CHECK OK')
+
+                curs.execute('INSERT INTO done_tasks (task_id, user_id) VALUES (%s, %s)',
+                             (task_id, user_id))
+                con.commit()
+                print('IM INSERT')
     return ' '
 
 @app.route('/head', methods=['GET', 'HEAD'])
