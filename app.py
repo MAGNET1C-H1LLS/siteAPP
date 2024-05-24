@@ -172,11 +172,14 @@ def logout():
     return redirect(url_for('main_page'))
 
 @app.route('/submit-task', methods=['POST'])
+@login_required
 def submit_task():
     if request.method == 'POST':
         response = make_response()
-        print(request.json)
-        print(current_user.id)
+        answer = filter_str(request.form['answer'])
+        task_title = request.form['popup_title']
+        user_id = current_user.id
+        print(user_id, task_title, answer, sep = '\n')
     return ' '
 
 @app.route('/head', methods=['GET', 'HEAD'])

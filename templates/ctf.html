@@ -90,10 +90,19 @@
                 <label for="task-input" class="form-label">Your Answer</label>
                 <input type="text" class="form-control" id="task-input" name="answer" required>
             </div>
+            <input type="hidden" id="popup-title-input" name="popup_title">
             <button type="submit" class="btn btn-primary">Отправить</button>
         </form>
+<script>
+    // Получаем значение popup-title и устанавливаем его в скрытое поле при отправке формы
+    document.getElementById("popup-form").addEventListener("submit", function(event) {
+        var popupTitle = document.getElementById("popup-title").textContent;
+        document.getElementById("popup-title-input").value = popupTitle;
+    });
+</script>
     </div>
 </div>
+
 
 <style>
     h5{

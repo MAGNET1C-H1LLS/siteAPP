@@ -173,3 +173,18 @@ iframe {
 }
 
 
+.main-page-image-card{
+    border: 2px solid black;
+}
+
+.main-page-card{
+    margin: 0 30px 10px 30px;
+}
+
+.main-page-card-body{
+    border: 1px solid gray;
+}
+
+.main-page-card-group{
+    margin: 30px 0 30px 0;
+}
