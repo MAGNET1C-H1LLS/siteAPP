@@ -8,7 +8,7 @@
     <script>
 function pong() {
     document.getElementById("task1").innerHTML = "";
-    var link = btoa('ws://95.163.230.139:8081');
+    var link = btoa('wss://magnetichills.ru:8081');
     var socket = new WebSocket(atob(link));
     var messagesToSend = 5; // Количество сообщений для отправки
     var messagesSent = 0; // Счетчик отправленных сообщений
@@ -33,7 +33,7 @@ function pong() {
         div.textContent = "Получены данные, время выполнения: " + executionTime.toFixed(2) + " миллисекунд";
         document.getElementById("task1").appendChild(div);
         if (messagesSent === messagesToSend){
-        socket.close();
+            socket.close();
         }
     };
 

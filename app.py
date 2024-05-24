@@ -12,6 +12,14 @@ login_manager.init_app(app)
 login_manager.login_view = 'logi'
 context = ('./../certificate.crt', './../private.key')
 
+forbidden_characters = (
+    "--", "=", "<", ">", "!", '(', ')', "/*", "*/",
+    ";", "'", '"', "\\", "%", "_", "*", " ", "- -", 
+    "UNION", "SELECT", "INSERT", "UPDATE", "DELETE", "DROP", "EXEC", "FROM",
+    "CONCAT", "SUBSTRING",
+    "AND", "OR", "NOT", "WHERE", "ORDER BY", "GROUP BY"
+)
+
 class User(UserMixin):
     def __init__(self, id, username, password):
         self.id = id
@@ -102,9 +110,10 @@ def task4():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
    if request.method == 'POST':
-       username = request.form['username']
-       password = request.form['password']
-       confirm_password = request.form['confirm_password']
+       username = filter_str(request.form['username'])
+       password = filter_str(request.form['password'])
+       confirm_password = filter_str(request.form['confirm_password'])
+       print(username, password, confirm_password, sep='\n')
 
        if password != confirm_password:
            flash('Passwords do not match!', 'danger')
@@ -130,8 +139,8 @@ def signup():
 @app.route('/logi', methods=['GET', 'POST'])
 def logi():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        username = filter_str(request.form['username'])
+        password = filter_str(request.form['password'])
         with psycopg2.connect(DATABASE) as connection:
             cursor = connection.cursor()
             query = "SELECT * FROM Users WHERE Name = %s AND Password = %s"
@@ -147,7 +156,13 @@ def logi():
                 flash("ВЫ КОНЧЕННЫЙ УРОДЕЦ", 'danger')
     return render_template("logi.html")
 
+def filter_str(string: str) -> str:
+    global forbidden_characters
 
+    for substring in forbidden_characters:
+        string = string.replace(substring, '').replace(substring.lower(), '')
+
+    return string
 
 @app.route('/logout')
 @login_required

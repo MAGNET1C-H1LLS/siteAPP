@@ -1,9 +1,14 @@
 import asyncio
 import websockets
 import ssl
-import pathlib
 
 ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+
+ssl_cert = './../certificate.crt'
+ssl_key = './../private.key'
+
+
+ssl_context.load_cert_chain(certfile=ssl_cert, keyfile=ssl_key)
 
 
 async def echo(websocket, path):
