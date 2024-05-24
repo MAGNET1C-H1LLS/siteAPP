@@ -141,6 +141,7 @@ def logi():
     if request.method == 'POST':
         username = filter_str(request.form['username'])
         password = filter_str(request.form['password'])
+        print(username, password, sep=' ')
         with psycopg2.connect(DATABASE) as connection:
             cursor = connection.cursor()
             query = "SELECT * FROM Users WHERE Name = %s AND Password = %s"
@@ -170,7 +171,13 @@ def logout():
     logout_user()
     return redirect(url_for('main_page'))
 
-
+@app.route('/submit-task', methods=['POST'])
+def submit_task():
+    if request.method == 'POST':
+        response = make_response()
+        print(request.json)
+        print(current_user.id)
+    return ' '
 
 @app.route('/head', methods=['GET', 'HEAD'])
 def test_head():
@@ -195,12 +202,6 @@ def check_header():
 def download_file():
     file_name = 'Chat.exe'
     return send_from_directory('files', file_name, as_attachment=True)
-
-
-@app.route('/submit-task', methods=['GET', 'POST'])
-def submit_task():
-    if request.method == 'POST':
-        print(request)
 
 
 if __name__ == '__main__':
