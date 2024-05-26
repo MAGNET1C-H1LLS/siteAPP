@@ -88,7 +88,7 @@
         width: 70%; /* Ширина окна */
         height: 70%; /* Высота окна */
         max-width: 800px; /* Максимальная ширина окна */
-        max-height: 600px; /* Максимальная высота окна */
+        max-height: 400px; /* Максимальная высота окна */
     }
     .close-btn {
         position: absolute;
@@ -103,6 +103,7 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr); /* Сетка из 3 колонок */
         gap: 10px; /* Расстояние между плитками */
+        margin: 0 0 20px 0;
     }
     .task {
         border: 1px solid #ccc; /* Цвет и толщина границы плиток */
@@ -125,7 +126,7 @@
         document.getElementById("popup-difficulty").innerText = difficulty;
         document.getElementById("popup-description").innerText = description;
         document.getElementById("overlay").style.display = "flex";
-        document.getElementById("dwn-button").href = "ctffiles/" + title + ".zip";
+        document.getElementById("dwn-button").href = "ctffiles/" + "'" + title + ".zip" + "'";
     }
 
     function closePopup() {

@@ -5,9 +5,12 @@
 {% endblock %}
 
 {% block body %}
-    <h1> {{username}} </h1>
+    <div class="h1-container">
+        <h1 class="left-label"> {{username}} </h1>
+        <h1 class="right-label"> Point: {{ sum_points }} </h1>
+    </div>
     <div class="my_account_container">
-        <div class="form-container">
+        <div class="change-password-container">
             <form method="POST" action="/change_password">
                 <h5>Change password</h5> <p></p>
                 <label for="old_password">Old password:</label><br>
@@ -23,10 +26,14 @@
             </form>
         </div>
 
-         <div class="team-info">
-             <h5>Team info</h5> <p></p>
-            <p>Team name</p>
-            <p>Point: {{sum_points}}</p>
+        <div class="statistic-container">
+            <h5>Statistic</h5>
+               {% for username, score in statistics %}
+                  <div class="label-container">
+                     <label class="left-label">{{ username }}</label>
+                     <label class="right-label">{{ score }}</label>
+                  </div>
+               {% endfor %}
         </div>
     </div>
 {% endblock %}

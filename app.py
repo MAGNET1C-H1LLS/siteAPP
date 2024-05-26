@@ -74,11 +74,22 @@ def my_account():
             )
             try:
                 sum_points = int(curs.fetchone()[0])
-            except: ...
-    print(sum_points)
+            except:
+                ...
+
+            curs.execute('''
+                SELECT u.name, COALESCE(SUM(t.point), 0) AS total_points
+                FROM users u
+                LEFT JOIN done_tasks dt ON u.id = dt.user_id
+                LEFT JOIN tasks t ON dt.task_id = t.id
+                GROUP BY u.name
+                ORDER BY total_points DESC;
+                ''')
+            statistics = [(x[0], x[1]) for x in curs.fetchall()]
     return render_template('my_account.html',
                            username=current_user.username,
-                           sum_points=sum_points)
+                           sum_points=sum_points,
+                           statistics=statistics)
 
 @app.route('/ctf')
 @login_required
@@ -132,12 +143,21 @@ def ctf():
 @app.route('/h34dl355_h0r53m4n')
 @login_required
 def web2():
-    return render_template('task1.html')
+    if request.method == 'GET':
+        return render_template('h34dl355_h0r53m4n.html')
+    response = make_response()
+    response.headers['FLAG'] = 'mgnh1lls{1_h4v3_4_h34d4ch3}'
+    return response
 
 @app.route('/h34ad4ch3')
 @login_required
 def web3():
-    return render_template('task2.html')
+    required_header = 'PILL'
+
+    if request.headers.get(required_header) == 'PARACETAMOL':
+        return "mgnh1lls{1_d0n7_h4v3_4_h34d4ch3}"
+    else:
+        return render_template('h34d4ch3.html')
 
 
 @app.route('/task1')
@@ -315,7 +335,7 @@ def download_ctf_file(filename):
     download_dir = './ctffiles/'
     if '.zip' not in filename:  return 'НЕТ'
     if '/' in filename: return 'НЕЛЬЗЯ ТАК ДЕЛАТЬ'
-    filepath = os.path.join(download_dir, filename)
+    filepath = os.path.join(download_dir,filename)
     if os.path.isfile(filepath):
         return send_file(filepath, as_attachment=True)
     else:

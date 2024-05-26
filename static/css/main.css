@@ -51,6 +51,18 @@ body {
     flex: 1;
 }
 
+@keyframes gradientAnimation {
+    0% {
+        background-color: #4E5452;
+    }
+    50% {
+        background-color: #2C3331;
+    }
+    100% {
+        background-color: #4E5452;
+    }
+}
+
 .site-footer {
     display: flex;
     justify-content: center;
@@ -60,6 +72,7 @@ body {
     text-align: center;
     padding: 10px;
     margin-top: auto;
+    animation: gradientAnimation 5s ease infinite;
 }
 
 .site-footer a {
@@ -112,14 +125,20 @@ iframe {
 
 
 
-.form-container {
+.change-password-container {
     border: 2px solid black; /* Черная обводка шириной 2 пикселя */
     padding: 20px;
-    width: 300px;
-    height: 370px;
-    margin-top: 30px;
-    margin-right: 100px;
+    width: 290px;
+    height: 350px;
+    margin: 20px;
+}
 
+.statistic-container {
+    border: 2px solid black;
+    padding: 20px;
+    width: 100%;
+    height: auto;
+    margin: 20px;
 }
 
 .team-info {
@@ -127,19 +146,17 @@ iframe {
     padding: 20px;
     width: 300px;
     height: 370px;
-    margin: 30px 0 30px 0; /* Добавляем верхний отступ, чтобы разделить секции */
-
-
+    margin: 30px 0 30px 0; /* Добавляем верхн */
 }
 
 .my_account_container{
     display:flex;
+    justify-content: space-between;
 }
 
 .team_logo{
     height: 150px;
     width: 150px;
-
     border: 2px dotted gray;
 }
 
@@ -151,8 +168,32 @@ iframe {
     display: flex;
 }
 
+.h1-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
 
+.label-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid black;
+    margin: 3px;
+    padding: 3px;
+}
 
+.left-label {
+    width: 45%;
+    text-align: left;
+}
+
+.right-label {
+    width: 45%;
+    text-align: right;
+}
 
 .content-container {
     display: flex;
@@ -187,4 +228,24 @@ iframe {
 
 .main-page-card-group{
     margin: 30px 0 30px 0;
+}
+
+
+.poison-btn-text a:hover {
+    color: #00c649;
+}
+
+.poison-li-text:hover {
+    color: #00c649;
+}
+
+.poison-site-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #549330;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto;
 }
